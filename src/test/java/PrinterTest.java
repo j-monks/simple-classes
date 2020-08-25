@@ -4,38 +4,28 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class PrinterTest {
-    Printer printer;
+    private Printer printer;
 
     @Before
-    public void before() {
-        printer = new Printer();
+    public void setUp() {
+        printer = new Printer(100, 100);
     }
 
     @Test
-    public void getPaper() {
+    public void canPrint10Pages() {
+        printer.print(5, 2);
+        assertEquals(90, printer.getPaper());
+    }
+
+    @Test
+    public void shouldNotPrintIfNotEnoughPaper() {
+        printer.print(100, 5);
         assertEquals(100, printer.getPaper());
     }
 
     @Test
-    public void getToner() {
-        assertEquals(100, printer.getToner());
+    public void shouldReduceTonerVolumeWhenPrinting() {
+        printer.print(5, 2);
+        assertEquals(90, printer.getToner());
     }
-
-    @Test
-    public void printerPrinting() {
-        printer.print(55, 1);
-        assertEquals(45, printer.getPaper());
-    }
-
-    @Test
-    public void printerNotPrintingIfNotEnoughPaper() {
-        assertEquals("Not enough paper!", printer.print(55, 2));
-    }
-
-    @Test
-    public void printerIsReducingTonerWhenPrinter() {
-        printer.print(1, 2);
-        assertEquals(98, printer.getToner());
-    }
-
 }

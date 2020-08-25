@@ -1,26 +1,27 @@
 public class Printer {
     private int paper;
-    private int toner;
+    private int tonerVolume;
 
-
-    public Printer() {
-        this.paper = 100;
-        this.toner = 100;
+    public Printer(int paper, int tonerVolume) {
+        this.paper = paper;
+        this.tonerVolume = tonerVolume;
     }
 
     public int getPaper() {
-        return this.paper;
+        return paper;
+    }
+
+    public void print(int pages, int copies){
+        int totalPages = pages * copies;
+
+        if (paper > totalPages){
+            paper -= totalPages;
+            tonerVolume -= totalPages;
+        }
     }
 
     public int getToner() {
-        return toner;
-    }
-
-    public String print(int copies, int pages) {
-        if (this.paper >= copies * pages) {
-            this.paper -= copies * pages;
-            this.toner -= pages;
-        }
-        return "Not enough paper!";
+        return tonerVolume;
     }
 }
+
